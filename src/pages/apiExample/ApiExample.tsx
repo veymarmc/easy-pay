@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-
-const apiUrl = 'https://localhost:5001/billing/search?category=ELECTRICITY';
+import { BillingCategory, IBilling } from '../../services/api/BillingApi';
+import { billingApi } from './../../services/api';
 
 function ApiExample() {
 	const [data, setData] = useState({});
 
 	useEffect(() => {
-		axios.get(apiUrl).then((response) => {
-			setData(response.data);
-		});
-	});
+		async function stablishData() {
+			const data: IBilling[] = await billingApi.getByCategory(BillingCategory.electricity);
+			setData(data);
+		}
+
+		stablishData();
+	}, []);
 
 	return (
 		<div>
