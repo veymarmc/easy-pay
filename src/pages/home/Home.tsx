@@ -26,6 +26,8 @@ function Home() {
 				<span>This is the value of the counter: {value}</span>
 				<br />
 				<Link to='/counter'>Go to counter</Link>
+				<br />
+				<Link to='/api-use-example'>Go to Api backend use example</Link>
 			</header>
 		</div>
 	);
