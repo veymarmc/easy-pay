@@ -1,9 +1,11 @@
 import React from 'react';
 import { screen } from '@testing-library/react';
-import { render } from './../../utils/testUtils/reduxUtils';
+import { redux } from './../../test';
 import Home from './Home';
 import counterReducer from './../../store/slices/counterSlice';
 import { BrowserRouter } from 'react-router-dom';
+
+const { render } = redux;
 
 // Improve the unitests
 test('renders learn react link', () => {
