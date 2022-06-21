@@ -1,5 +1,5 @@
 import React from 'react';
-import { Counter, Home, LandingPage } from './../pages';
+import { ApiExample, Counter, Home, LandingPage } from './../pages';
 
 interface RouteInterface {
 	path: string;
@@ -18,6 +18,10 @@ const routes: Array<RouteInterface> = [
 	{
 		path: '/counter',
 		element: <Counter />,
+	},
+	{
+		path: '/api-use-example',
+		element: <ApiExample />,
 	},
 ];
 
