@@ -1,7 +1,12 @@
 import React from 'react';
+import { AppBar } from './../../components';
 
 function LandingPage() {
-	return <div>Landing Page</div>;
+	return (
+		<>
+			<AppBar />
+		</>
+	);
 }
 
 export default LandingPage;
