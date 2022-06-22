@@ -1,0 +1,29 @@
+/*
+GENERAL STYLES
+*/
+//box sizing
+.b-sizing {
+	box-sizing: border-box;
+}
+
+//flex
+.flex {
+	display: flex;
+}
+.justify-content-sb {
+	@extend .flex;
+	justify-content: space-between;
+}
+.justify-content-c {
+	@extend .flex;
+	justify-content: center;
+}
+.align-items-c {
+	@extend .flex;
+	align-items: center;
+}
+
+//dimensions
+.w-100 {
+	width: 100%;
+}

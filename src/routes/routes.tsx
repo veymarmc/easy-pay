@@ -1,5 +1,5 @@
 import React from 'react';
-import { ApiExample, Counter, Home, LandingPage } from './../pages';
+import { ApiExample, Counter, Dashboard, Home, LandingPage } from './../pages';
 
 interface RouteInterface {
 	path: string;
@@ -14,6 +14,10 @@ const routes: Array<RouteInterface> = [
 	{
 		path: '/home',
 		element: <Home />,
+	},
+	{
+		path: '/dashBoard',
+		element: <Dashboard />,
 	},
 	{
 		path: '/counter',
