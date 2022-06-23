@@ -1,0 +1,77 @@
+/*
+* AS THIS FILE GROWS IT WILL BE DIVIDED LATER.
+*/
+
+/*
+REACT ROOT ELEMENT
+*/
+#root {
+	height: 100%;
+}
+
+/*
+VARIABLES
+*/
+:root {
+	--primary-color: #0073b9;
+	--secondary-color: #f5f7f8;
+	--component-color: #48ce65;
+}
+
+/*
+GENERAL STYLES
+*/
+//box sizing
+.b-sizing {
+	box-sizing: border-box;
+}
+
+/*
+LAYOUT
+*/
+.inline-b {
+	display: inline-block;
+}
+//flex container
+.flex {
+	display: flex !important;
+}
+.inline-flex {
+	display: inline-flex !important;
+}
+.justify-content-sb {
+	@extend .flex;
+	justify-content: space-between;
+}
+.justify-content-c {
+	@extend .flex;
+	justify-content: center;
+}
+.align-items-c {
+	@extend .flex;
+	align-items: center;
+}
+.flex-column {
+	@extend .flex;
+	flex-direction: column;
+}
+// flex children
+.flex-1 {
+	flex: 1;
+}
+
+// dimensions
+.w-100 {
+	width: 100%;
+}
+.w-50 {
+	width: 50%;
+}
+// positions
+.p-relative {
+	position: relative;
+}
+// visibility
+.v-hidden {
+	visibility: hidden;
+}

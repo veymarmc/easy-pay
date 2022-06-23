@@ -1,0 +1,9 @@
+.dashboard {
+	background-color: transparent;
+	padding: 3rem 0;
+	height: 100%;
+
+	& &__client-id {
+		margin-left: 2rem;
+	}
+}

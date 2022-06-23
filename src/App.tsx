@@ -1,17 +1,19 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { CssBaseline } from '@mui/material';
+import { BrowserRouter } from 'react-router-dom';
 import { store } from './store';
-import { Router } from './routes';
+import { Routes } from './routes';
+import { MainLayout } from './layouts';
 
 function App() {
 	return (
-		<>
-			<CssBaseline /> {/*provide mui css normalization} */}
-			<Provider store={store}>
-				<Router />
-			</Provider>
-		</>
+		<Provider store={store}>
+			<BrowserRouter>
+				<MainLayout>
+					<Routes />
+				</MainLayout>
+			</BrowserRouter>
+		</Provider>
 	);
 }
 

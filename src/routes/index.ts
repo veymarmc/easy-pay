@@ -1,1 +1,1 @@
-export { default as Router } from './ReactRouter';
+export { default as Routes } from './AppRoutes';

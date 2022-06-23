@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useAppSelector } from './../../store';
 import logo from './../../assets/images/logo.svg';
-import './home.css';
+import './home.scss';
 
 function Home() {
 	const value = useAppSelector((state) => state.counter.value);

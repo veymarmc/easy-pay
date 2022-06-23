@@ -1,0 +1,10 @@
+.plain-card {
+	border-radius: 1rem;
+	padding: 2rem;
+	box-shadow: 0 6px 16px 0 rgb(31, 36, 38, 0.15);
+	max-width: 27.143rem;
+	background-color: white;
+	.section + .section {
+		margin-top: 1rem;
+	}
+}

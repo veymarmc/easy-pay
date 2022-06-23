@@ -1,0 +1,7 @@
+.main-layout {
+	height: 100%;
+
+	& &__content {
+		padding: 4.5rem 0;
+	}
+}

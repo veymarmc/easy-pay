@@ -1,0 +1,31 @@
+.lp-price-content {
+	background-color: var(--secondary-color);
+	padding: 4.5rem 0;
+
+	& &__title {
+		font-size: 2.125rem;
+		text-align: center;
+	}
+
+	& &__plans {
+		margin-top: 1.5rem;
+	}
+
+	& &__prices {
+		margin-bottom: 1.5rem;
+
+		h3 {
+			font-size: 3rem;
+		}
+
+		.plain-card + .plain-card {
+			margin-left: 2.5rem;
+		}
+	}
+
+	& &__subtitle {
+		margin-top: 0.5rem;
+		font-size: 1.25rem;
+		font-weight: bold;
+	}
+}
