@@ -4,7 +4,7 @@ export interface IProps {
 	/**
 	 * React node
 	 */
-	children: ReactNode;
+	children?: ReactNode;
 	/**
 	 * The class(es) to apply to the container div
 	 */

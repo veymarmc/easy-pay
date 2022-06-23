@@ -43,8 +43,11 @@ class BillingApi extends BaseApi {
 	 * Get all pending billings per client
 	 * @param clientId specific client id
 	 */
-	async getPendingBillingsByClient(clientId: number): Promise<IBilling[]> {
-		return this.get<IBilling>('/search', { ClientId: clientId.toString() });
+	async getBillings(
+		{ clientId = '', category = '', status = '' },
+		cache: boolean = true
+	): Promise<IBilling[]> {
+		return this.get<IBilling>('/search', { clientId, category, status }, cache);
 	}
 
 	async createBill(period: number, category: BillingCategory): Promise<void> {

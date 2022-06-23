@@ -2,11 +2,11 @@ import { IQueryParams } from './types';
 
 class Utils {
 	serializeQueryParams(queryParams: IQueryParams = {}): string {
-		const entries = Object.entries(queryParams);
+		const queryParamsArray = Object.entries(queryParams)
+			.map(([key, value]) => (value !== '' ? `${key}=${value}` : ''))
+			.filter((param) => !!param);
 
-		return entries.length === 0
-			? ''
-			: '?' + entries.map(([key, value]) => `${key}=${value}`).join('&');
+		return queryParamsArray.length === 0 ? '' : '?' + queryParamsArray.join('&');
 	}
 }
 

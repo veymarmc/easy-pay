@@ -1,0 +1,35 @@
+.pay-modal {
+	font-size: 1rem;
+
+	& &__header {
+		background-color: var(--component-color) !important;
+		color: white !important;
+	}
+
+	& &__icon {
+		width: 21.428rem;
+	}
+
+	& &__content {
+		background-color: var(--secondary-color) !important;
+	}
+
+	& &__month {
+		input {
+			width: 100%;
+			font-family: Lato, 'Helvetica Neue', Arial, Helvetica, sans-serif;
+			margin: 0;
+			outline: 0;
+			-webkit-appearance: none;
+			line-height: 1.21428571em;
+			padding: 0.67857143em 1em;
+			font-size: 1em;
+			background-color: white;
+			border: 1px solid rgba(34, 36, 38, 0.15);
+			color: rgba(0, 0, 0, 0.87);
+			border-radius: 0.28571429rem;
+			box-shadow: 0 0 0 0 transparent inset;
+			transition: box-shadow 0.1s ease, width 0.1s ease;
+		}
+	}
+}

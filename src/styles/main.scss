@@ -1,4 +1,24 @@
 /*
+* AS THIS FILE GROWS IT WILL BE DIVIDED LATER.
+*/
+
+/*
+REACT ROOT ELEMENT
+*/
+#root {
+	height: 100%;
+}
+
+/*
+VARIABLES
+*/
+:root {
+	--primary-color: #0073b9;
+	--secondary-color: #f5f7f8;
+	--component-color: #48ce65;
+}
+
+/*
 GENERAL STYLES
 */
 //box sizing
@@ -6,9 +26,18 @@ GENERAL STYLES
 	box-sizing: border-box;
 }
 
-//flex
+/*
+LAYOUT
+*/
+.inline-b {
+	display: inline-block;
+}
+//flex container
 .flex {
-	display: flex;
+	display: flex !important;
+}
+.inline-flex {
+	display: inline-flex !important;
 }
 .justify-content-sb {
 	@extend .flex;
@@ -22,8 +51,27 @@ GENERAL STYLES
 	@extend .flex;
 	align-items: center;
 }
+.flex-column {
+	@extend .flex;
+	flex-direction: column;
+}
+// flex children
+.flex-1 {
+	flex: 1;
+}
 
-//dimensions
+// dimensions
 .w-100 {
 	width: 100%;
+}
+.w-50 {
+	width: 50%;
+}
+// positions
+.p-relative {
+	position: relative;
+}
+// visibility
+.v-hidden {
+	visibility: hidden;
 }

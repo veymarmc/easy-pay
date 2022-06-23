@@ -1,4 +1,5 @@
-import axios, { AxiosInstance } from 'axios';
+import axios, { AxiosInstance, AxiosAdapter } from 'axios';
+import { cacheAdapterEnhancer } from 'axios-extensions';
 import { IQueryParams } from './types';
 import utils from './Utils';
 
@@ -16,6 +17,7 @@ class BaseApi {
 	constructor(baseResource: string = '') {
 		this.client = axios.create({
 			baseURL: this.BASE_URL + baseResource,
+			adapter: cacheAdapterEnhancer(axios.defaults.adapter as AxiosAdapter),
 		});
 	}
 
@@ -24,9 +26,10 @@ class BaseApi {
 	 * @param resource specific path to the resource to retrieve.
 	 * @returns A promise with the resource to retrieve.
 	 */
-	async get<T>(resource: string, queryParams?: IQueryParams): Promise<T[]> {
+	async get<T>(resource: string, queryParams?: IQueryParams, cache: boolean = true): Promise<T[]> {
 		const { data } = await this.client.get<T[]>(
-			`${resource + '' + utils.serializeQueryParams(queryParams)}`
+			`${resource}${utils.serializeQueryParams(queryParams)}`,
+			{ cache }
 		);
 		return data;
 	}
