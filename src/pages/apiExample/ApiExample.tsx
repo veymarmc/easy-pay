@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BillingCategory, IBilling } from '../../services/api/BillingApi';
+import { BillCategory, IBill } from '../../services/api/BillingApi';
 import { billingApi } from './../../services/api';
 
 function ApiExample() {
@@ -7,7 +7,7 @@ function ApiExample() {
 
 	useEffect(() => {
 		async function stablishData() {
-			const data: IBilling[] = await billingApi.getByCategory(BillingCategory.electricity);
+			const data: IBill[] = await billingApi.getByCategory(BillCategory.electricity);
 			setData(data);
 		}
 

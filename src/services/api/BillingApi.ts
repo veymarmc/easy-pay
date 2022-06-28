@@ -1,42 +1,48 @@
 import BaseApi from './BaseApi';
+import { IBillFilter, IParams } from './types';
 
-export enum BillingCategory {
+export enum BillCategory {
 	water = 'WATER',
 	sewer = 'SEWER',
 	electricity = 'ELECTRICITY',
 }
 
-export interface IBilling {
+export enum BillStatus {
+	pending = 'PENDING',
+	paid = 'PAID',
+}
+
+export interface IBill {
 	billId: number;
 	period: number;
 	clientId: number;
-	category: BillingCategory;
+	category: BillCategory;
 	amount: number;
-	status: string;
+	status: BillStatus;
 	updated: string;
 	client: null;
 }
 
-export interface IBillingCreation {
+export interface IBillCreation {
 	period: number;
-	category: BillingCategory;
+	category: BillCategory;
 }
 
-export interface IBillingPayment extends IBillingCreation {
+export interface IBillPayment extends IBillCreation {
 	clientId: number;
 }
 
 class BillingApi extends BaseApi {
 	constructor() {
-		super('/billing');
+		super(''); // TODO: this seems to be not necessary
 	}
 
 	/**
 	 * Get Billings by category
 	 * @param category category param to filter the billings
 	 */
-	async getByCategory(category: BillingCategory): Promise<IBilling[]> {
-		return this.get<IBilling>('/search', { category });
+	async getByCategory(category: BillCategory): Promise<IBill[]> {
+		return this.getBillings({ category });
 	}
 
 	/**
@@ -44,20 +50,21 @@ class BillingApi extends BaseApi {
 	 * @param clientId specific client id
 	 */
 	async getBillings(
-		{ clientId = '', category = '', status = '' },
+		filters?: IBillFilter,
+		extraParams?: IParams,
 		cache: boolean = true
-	): Promise<IBilling[]> {
-		return this.get<IBilling>('/search', { clientId, category, status }, cache);
+	): Promise<IBill[]> {
+		return this.get<IBill>('/Bills', { filters, extraParams }, cache);
 	}
 
-	async createBill(period: number, category: BillingCategory): Promise<void> {
-		const payload: IBillingCreation = { period, category };
-		await this.post<IBillingCreation, void>('/bills', payload);
+	async createBill(period: number, category: BillCategory): Promise<void> {
+		const payload: IBillCreation = { period, category };
+		await this.post<IBillCreation, void>('/bills', payload);
 	}
 
-	async payBill(clientId: number, period: number, category: BillingCategory): Promise<IBilling> {
-		const payload: IBillingPayment = { clientId, period, category };
-		return this.post<IBillingPayment, IBilling>('/pay', payload);
+	async payBill(clientId: number, period: number, category: BillCategory): Promise<IBill> {
+		const payload: IBillPayment = { clientId, period, category };
+		return this.post<IBillPayment, IBill>('/pay', payload);
 	}
 }
 
