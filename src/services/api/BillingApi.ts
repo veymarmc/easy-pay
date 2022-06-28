@@ -9,10 +9,6 @@ import {
 } from './../../domain';
 
 class BillingApi extends BaseApi {
-	constructor() {
-		super(''); // TODO: this seems to be not necessary
-	}
-
 	/**
 	 * Get Billings by category
 	 * @param category category param to filter the billings
