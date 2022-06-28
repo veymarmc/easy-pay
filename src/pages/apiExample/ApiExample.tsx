@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BillCategory, IBill } from '../../services/api/BillingApi';
+import { BillCategory, IBill } from '../../domain';
 import { billingApi } from './../../services/api';
 
 function ApiExample() {

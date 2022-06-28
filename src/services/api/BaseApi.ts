@@ -1,6 +1,6 @@
 import axios, { AxiosInstance, AxiosAdapter } from 'axios';
 import { cacheAdapterEnhancer } from 'axios-extensions';
-import { IQueryParams } from './types';
+import { IQueryParams } from './../../domain';
 import Utils from './Utils';
 
 interface DataResults<T> {

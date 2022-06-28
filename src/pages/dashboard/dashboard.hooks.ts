@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { BillStatus } from '../../services/api/BillingApi';
-import { IBill, billingApi } from '../../services/api';
+import { BillStatus, IBill } from '../../domain';
+import { billingApi } from '../../services/api';
 
 /**
  * Get the bill data

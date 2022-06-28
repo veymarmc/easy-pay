@@ -1,4 +1,4 @@
-import { IQueryParams } from './types';
+import { IQueryParams } from './../../domain/Api';
 
 class Utils {
 	static serializeQueryParams(queryParams?: IQueryParams): string {

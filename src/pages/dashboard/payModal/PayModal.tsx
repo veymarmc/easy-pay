@@ -1,7 +1,6 @@
 import React, { ReactNode } from 'react';
 import { Button, Form, Modal } from 'semantic-ui-react';
-import { IBill } from '../../../services/api';
-import { BillCategory } from '../../../services/api/BillingApi';
+import { IBill, BillCategory } from '../../../domain';
 import dolarLogo from './../../../assets/images/dolar-logo.svg';
 import { usePayModalLogic } from './payModal.hooks';
 import './payModal.scss';

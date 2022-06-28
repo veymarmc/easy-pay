@@ -4,8 +4,8 @@ import moment from 'moment';
 import PayModal from './payModal/PayModal';
 import { useGetBillingData } from './dashboard.hooks';
 import { useSetNavBarActions } from '../../services/hooks';
-import { billingApi, IBill } from '../../services/api';
-import { BillStatus } from '../../services/api/BillingApi';
+import { billingApi } from '../../services/api';
+import { BillStatus, IBill } from '../../domain';
 import './dashboard.scss';
 
 function Dashboard() {

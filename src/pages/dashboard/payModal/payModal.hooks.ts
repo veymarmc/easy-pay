@@ -1,5 +1,6 @@
 import { useCallback, useMemo, useState } from 'react';
-import { IBill, billingApi } from '../../../services/api';
+import { IBill } from '../../../domain';
+import { billingApi } from '../../../services/api';
 
 export function usePayModalLogic(bill: IBill, updateBills: (s: IBill) => void) {
 	const [open, setOpen] = useState(false);
