@@ -1,14 +1,14 @@
 import React, { useCallback, useMemo, useState } from 'react';
-import { Container, Table, Header, Button, Input, Icon } from 'semantic-ui-react';
+import { Button, Container, Header, Icon, Input, Table } from 'semantic-ui-react';
 import moment from 'moment';
 import PayModal from './payModal/PayModal';
-import './dashBoard.scss';
-import { useGetBillingData } from './hooks';
-import { useSetNavBarActions } from './../../services/hooks';
-import { billingApi, IBill } from './../../services/api';
-import { BillStatus } from '../../services/api/BillingApi';
+import { useGetBillingData } from './dashboard.hooks';
+import { useLoadNavbarContext } from '../../services/hooks';
+import { billingApi } from '../../services/api';
+import { BillStatus, IBill } from '../../domain';
+import './dashboard.scss';
 
-function DashBoard() {
+function Dashboard() {
 	const [pendingBills, setPendingBills] = useState(true);
 	const [clientId, setClientId] = useState(1);
 	const { bills, setBills } = useGetBillingData(pendingBills, clientId);
@@ -41,17 +41,21 @@ function DashBoard() {
 		[pendingBills, setBills]
 	);
 
-	useSetNavBarActions(
-		<Button.Group>
-			<Button color='teal' active={pendingBills} onClick={enablePendingBills}>
-				Pending Bills
-			</Button>
-			<Button.Or text='<>' />
-			<Button color='green' active={!pendingBills} onClick={disablePendingBills}>
-				Bill History
-			</Button>
-		</Button.Group>
+	const navBarActions = useMemo(
+		() => (
+			<Button.Group>
+				<Button color='teal' active={pendingBills} onClick={enablePendingBills}>
+					Pending Bills
+				</Button>
+				<Button.Or text='<>' />
+				<Button color='green' active={!pendingBills} onClick={disablePendingBills}>
+					Bill History
+				</Button>
+			</Button.Group>
+		),
+		[disablePendingBills, enablePendingBills, pendingBills]
 	);
+	useLoadNavbarContext(navBarActions);
 
 	return (
 		<Container className='dashboard'>
@@ -123,4 +127,4 @@ function DashBoard() {
 	);
 }
 
-export default DashBoard;
+export default Dashboard;

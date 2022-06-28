@@ -1,6 +1,7 @@
 import axios, { AxiosInstance, AxiosAdapter } from 'axios';
 import { cacheAdapterEnhancer } from 'axios-extensions';
-import { IQueryParams } from './types';
+import { BASE_URL, HEADERS } from '../../config/config';
+import { IQueryParams } from './../../domain';
 import Utils from './Utils';
 
 interface DataResults<T> {
@@ -8,25 +9,13 @@ interface DataResults<T> {
 }
 
 class BaseApi {
-	// TODO use environment variables for BASE_URL.
-	/**
-	 * Base url to make all requests.
-	 */
-	private BASE_URL = 'https://parseapi.back4app.com';
-	private HEADERS = {
-		'X-Parse-Application-Id': 'O3fHXqksxpt7oy9KOQcyojCUciEo6KjetNnuUdxo',
-		'X-Parse-REST-API-Key': 'AEX0iIllNVwlJBpb1SGYJNx1S1cgtEbtPEaTSuHe',
-	};
-	/**
-	 * http axios client instance.
-	 */
 	private client: AxiosInstance;
 
-	constructor(baseResource: string = '') {
+	constructor() {
 		this.client = axios.create({
-			baseURL: this.BASE_URL + baseResource,
+			baseURL: BASE_URL,
 			adapter: cacheAdapterEnhancer(axios.defaults.adapter as AxiosAdapter),
-			headers: this.HEADERS,
+			headers: HEADERS,
 		});
 	}
 

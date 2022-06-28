@@ -1,25 +1,20 @@
-import React, { useEffect } from 'react';
+import React, { useMemo } from 'react';
 import { Button } from 'semantic-ui-react';
 import { MainContent, PriceContent } from './content';
-import { useAppDispatch, barActions } from './../../store';
 import { Link } from 'react-router-dom';
+import { useLoadNavbarContext } from '../../services/hooks';
 
 function LandingPage() {
-	const dispatch = useAppDispatch();
+	const navBarActions = useMemo(
+		() => (
+			<Button as={Link} primary to='/dashBoard'>
+				Go to pay
+			</Button>
+		),
+		[]
+	);
 
-	useEffect(() => {
-		dispatch(
-			barActions.changeBarActions(
-				<Button as={Link} primary to='/dashBoard'>
-					Go to pay
-				</Button>
-			)
-		);
-
-		return () => {
-			dispatch(barActions.reset());
-		};
-	}, [dispatch]);
+	useLoadNavbarContext(navBarActions);
 
 	return (
 		<>
