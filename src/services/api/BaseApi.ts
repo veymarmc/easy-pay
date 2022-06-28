@@ -12,7 +12,7 @@ class BaseApi {
 	/**
 	 * Base url to make all requests.
 	 */
-	private BASE_URL = 'https://parseapi.back4app.com/classes';
+	private BASE_URL = 'https://parseapi.back4app.com';
 	private HEADERS = {
 		'X-Parse-Application-Id': 'O3fHXqksxpt7oy9KOQcyojCUciEo6KjetNnuUdxo',
 		'X-Parse-REST-API-Key': 'AEX0iIllNVwlJBpb1SGYJNx1S1cgtEbtPEaTSuHe',
@@ -61,7 +61,7 @@ class BaseApi {
 	 * @param payload The necessary required payload
 	 * @returns the produced data if retrieved.
 	 */
-	async post<M, T>(resource: string, payload: M): Promise<T> {
+	async post<D, T>(resource: string, payload: D): Promise<T> {
 		const { data } = await this.client.post<T>(`${resource}`, payload);
 		return data;
 	}

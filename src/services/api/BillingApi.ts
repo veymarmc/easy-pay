@@ -54,7 +54,7 @@ class BillingApi extends BaseApi {
 		extraParams?: IParams,
 		cache: boolean = true
 	): Promise<IBill[]> {
-		return this.get<IBill>('/Bills', { filters, extraParams }, cache);
+		return this.get<IBill>('/classes/Bills', { filters, extraParams }, cache);
 	}
 
 	async createBill(period: number, category: BillCategory): Promise<void> {
@@ -62,9 +62,9 @@ class BillingApi extends BaseApi {
 		await this.post<IBillCreation, void>('/bills', payload);
 	}
 
-	async payBill(clientId: number, period: number, category: BillCategory): Promise<IBill> {
+	async payBill(clientId: number, period: number, category: BillCategory): Promise<void> {
 		const payload: IBillPayment = { clientId, period, category };
-		return this.post<IBillPayment, IBill>('/pay', payload);
+		return this.post<IBillPayment, void>('/functions/payBill', payload);
 	}
 }
 
