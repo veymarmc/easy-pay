@@ -1,13 +1,13 @@
 import React, { ReactNode, useCallback, useState } from 'react';
 import { Button, Form, Modal } from 'semantic-ui-react';
-import { IBilling, billingApi } from '../../../services/api';
+import { IBill, billingApi } from '../../../services/api';
 import dolarLogo from './../../../assets/images/dolar-logo.svg';
 import './payModal.scss';
 
 interface IPayModalProps {
 	trigger: ReactNode;
-	bill: IBilling;
-	updateBills: (s: IBilling) => void;
+	bill: IBill;
+	updateBills: (s: IBill) => void;
 }
 
 function PayModal({ trigger, bill, updateBills }: IPayModalProps) {

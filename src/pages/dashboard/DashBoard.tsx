@@ -5,7 +5,8 @@ import PayModal from './payModal/PayModal';
 import './dashBoard.scss';
 import { useGetBillingData } from './hooks';
 import { useSetNavBarActions } from './../../services/hooks';
-import { billingApi, IBilling } from './../../services/api';
+import { billingApi, IBill } from './../../services/api';
+import { BillStatus } from '../../services/api/BillingApi';
 
 function DashBoard() {
 	const [pendingBills, setPendingBills] = useState(true);
@@ -24,13 +25,14 @@ function DashBoard() {
 	}, [setPendingBills]);
 
 	const updateBills = useCallback(
-		async (b: IBilling) => {
+		async (b: IBill) => {
 			await billingApi.payBill(b.clientId, b.period, b.category);
 			const bs = await billingApi.getBillings(
 				{
-					clientId: pendingBills ? b.clientId.toString() : '',
-					status: pendingBills ? 'PENDING' : '',
+					clientId: pendingBills ? b.clientId : undefined,
+					status: pendingBills ? BillStatus.pending : undefined,
 				},
+				undefined,
 				false
 			);
 

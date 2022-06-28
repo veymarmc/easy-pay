@@ -1,15 +1,22 @@
 import { IQueryParams } from './types';
 
 class Utils {
-	serializeQueryParams(queryParams: IQueryParams = {}): string {
-		const queryParamsArray = Object.entries(queryParams)
-			.map(([key, value]) => (value !== '' ? `${key}=${value}` : ''))
+	static serializeQueryParams(queryParams?: IQueryParams): string {
+		if (!queryParams) {
+			return '';
+		}
+
+		const queryParamsArray = Object.entries({
+			where: queryParams.filters,
+			...queryParams.extraParams,
+		})
+			.map(([key, value]) =>
+				!value ? undefined : key === 'where' ? `${key}=${JSON.stringify(value)}` : `${key}=${value}`
+			)
 			.filter((param) => !!param);
 
-		return queryParamsArray.length === 0 ? '' : '?' + queryParamsArray.join('&');
+		return !queryParamsArray.length ? '' : `?${queryParamsArray.join('&')}`;
 	}
 }
 
-const utils = new Utils();
-
-export default utils;
+export default Utils;

@@ -1,14 +1,22 @@
 import axios, { AxiosInstance, AxiosAdapter } from 'axios';
 import { cacheAdapterEnhancer } from 'axios-extensions';
 import { IQueryParams } from './types';
-import utils from './Utils';
+import Utils from './Utils';
+
+interface DataResults<T> {
+	results: Array<T>;
+}
 
 class BaseApi {
 	// TODO use environment variables for BASE_URL.
 	/**
 	 * Base url to make all requests.
 	 */
-	private BASE_URL = 'https://localhost:5001';
+	private BASE_URL = 'https://parseapi.back4app.com';
+	private HEADERS = {
+		'X-Parse-Application-Id': 'O3fHXqksxpt7oy9KOQcyojCUciEo6KjetNnuUdxo',
+		'X-Parse-REST-API-Key': 'AEX0iIllNVwlJBpb1SGYJNx1S1cgtEbtPEaTSuHe',
+	};
 	/**
 	 * http axios client instance.
 	 */
@@ -18,6 +26,7 @@ class BaseApi {
 		this.client = axios.create({
 			baseURL: this.BASE_URL + baseResource,
 			adapter: cacheAdapterEnhancer(axios.defaults.adapter as AxiosAdapter),
+			headers: this.HEADERS,
 		});
 	}
 
@@ -27,11 +36,12 @@ class BaseApi {
 	 * @returns A promise with the resource to retrieve.
 	 */
 	async get<T>(resource: string, queryParams?: IQueryParams, cache: boolean = true): Promise<T[]> {
-		const { data } = await this.client.get<T[]>(
-			`${resource}${utils.serializeQueryParams(queryParams)}`,
+		const { data } = await this.client.get<DataResults<T>>(
+			`${resource}${Utils.serializeQueryParams(queryParams)}`,
 			{ cache }
 		);
-		return data;
+
+		return data.results;
 	}
 
 	/**
@@ -51,7 +61,7 @@ class BaseApi {
 	 * @param payload The necessary required payload
 	 * @returns the produced data if retrieved.
 	 */
-	async post<M, T>(resource: string, payload: M): Promise<T> {
+	async post<D, T>(resource: string, payload: D): Promise<T> {
 		const { data } = await this.client.post<T>(`${resource}`, payload);
 		return data;
 	}
