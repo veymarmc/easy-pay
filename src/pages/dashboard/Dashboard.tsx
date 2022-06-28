@@ -3,7 +3,7 @@ import { Button, Container, Header, Icon, Input, Table } from 'semantic-ui-react
 import moment from 'moment';
 import PayModal from './payModal/PayModal';
 import { useGetBillingData } from './dashboard.hooks';
-import { useSetNavBarActions } from '../../services/hooks';
+import { useLoadNavbarContext } from '../../services/hooks';
 import { billingApi } from '../../services/api';
 import { BillStatus, IBill } from '../../domain';
 import './dashboard.scss';
@@ -41,17 +41,21 @@ function Dashboard() {
 		[pendingBills, setBills]
 	);
 
-	useSetNavBarActions(
-		<Button.Group>
-			<Button color='teal' active={pendingBills} onClick={enablePendingBills}>
-				Pending Bills
-			</Button>
-			<Button.Or text='<>' />
-			<Button color='green' active={!pendingBills} onClick={disablePendingBills}>
-				Bill History
-			</Button>
-		</Button.Group>
+	const navBarActions = useMemo(
+		() => (
+			<Button.Group>
+				<Button color='teal' active={pendingBills} onClick={enablePendingBills}>
+					Pending Bills
+				</Button>
+				<Button.Or text='<>' />
+				<Button color='green' active={!pendingBills} onClick={disablePendingBills}>
+					Bill History
+				</Button>
+			</Button.Group>
+		),
+		[disablePendingBills, enablePendingBills, pendingBills]
 	);
+	useLoadNavbarContext(navBarActions);
 
 	return (
 		<Container className='dashboard'>
