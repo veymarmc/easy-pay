@@ -1,14 +1,14 @@
 import React, { useCallback, useMemo, useState } from 'react';
-import { Container, Table, Header, Button, Input, Icon } from 'semantic-ui-react';
+import { Button, Container, Header, Icon, Input, Table } from 'semantic-ui-react';
 import moment from 'moment';
 import PayModal from './payModal/PayModal';
-import './dashBoard.scss';
-import { useGetBillingData } from './hooks';
-import { useSetNavBarActions } from './../../services/hooks';
-import { billingApi, IBill } from './../../services/api';
+import { useGetBillingData } from './dashboard.hooks';
+import { useSetNavBarActions } from '../../services/hooks';
+import { billingApi, IBill } from '../../services/api';
 import { BillStatus } from '../../services/api/BillingApi';
+import './dashboard.scss';
 
-function DashBoard() {
+function Dashboard() {
 	const [pendingBills, setPendingBills] = useState(true);
 	const [clientId, setClientId] = useState(1);
 	const { bills, setBills } = useGetBillingData(pendingBills, clientId);
@@ -123,4 +123,4 @@ function DashBoard() {
 	);
 }
 
-export default DashBoard;
+export default Dashboard;

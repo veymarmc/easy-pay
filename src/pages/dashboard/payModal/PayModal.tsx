@@ -1,32 +1,44 @@
-import React, { ReactNode, useCallback, useState } from 'react';
+import React, { ReactNode } from 'react';
 import { Button, Form, Modal } from 'semantic-ui-react';
-import { IBill, billingApi } from '../../../services/api';
+import { IBill } from '../../../services/api';
+import { BillCategory } from '../../../services/api/BillingApi';
 import dolarLogo from './../../../assets/images/dolar-logo.svg';
+import { usePayModalLogic } from './payModal.hooks';
 import './payModal.scss';
 
+const serviceOptions = Object.values(BillCategory).map((value) => ({
+	key: value,
+	text: value,
+	value: value,
+}));
+
 interface IPayModalProps {
+	/**
+	 * Element when clicked will fire to show the modal.
+	 */
 	trigger: ReactNode;
+	/**
+	 * The current selected bill to pay
+	 */
 	bill: IBill;
+	/**
+	 * Update the bills list refreshing the current changes.
+	 */
 	updateBills: (s: IBill) => void;
 }
 
 function PayModal({ trigger, bill, updateBills }: IPayModalProps) {
-	const [open, setOpen] = useState(false);
-	const payBill = useCallback(async () => {
-		setOpen(false);
-		await billingApi.payBill(bill.clientId, bill.period, bill.category);
-		updateBills(bill);
-	}, [updateBills, bill]);
+	const { open, payBill, monthValue, closeModal, openModal } = usePayModalLogic(bill, updateBills);
 
 	return (
 		<Modal
-			onClose={() => setOpen(false)}
-			onOpen={() => setOpen(true)}
+			className='pay-modal'
+			closeOnDimmerClick={false}
+			closeOnEscape={false}
+			onClose={closeModal}
+			onOpen={openModal}
 			open={open}
 			trigger={trigger}
-			className='pay-modal'
-			closeOnEscape={false}
-			closeOnDimmerClick={false}
 		>
 			<Modal.Header className='pay-modal__header'>Confirm Paymen? (read only)</Modal.Header>
 			<Modal.Content image className='pay-modal__content'>
@@ -34,39 +46,37 @@ function PayModal({ trigger, bill, updateBills }: IPayModalProps) {
 				<Modal.Description>
 					<Form size='big'>
 						<Form.Field
-							label='Client ID'
 							control='input'
-							placeholder='First name'
-							type='number'
+							label='Client ID'
 							min={1}
-							value={bill.clientId}
+							placeholder='First name'
 							readOnly
+							type='number'
+							value={bill.clientId}
 						/>
 						<Form.Dropdown
-							label='Type of Service'
-							options={optionsServices}
-							placeholder='Services'
-							value={bill.category}
 							fluid
-							selection
+							label='Type of Service'
+							options={serviceOptions}
+							placeholder='Services'
 							readOnly
+							selection
+							value={bill.category}
 						/>
 						<Form.Input
-							label='Month/Year'
-							control='input'
-							placeholder='YYYYMM'
-							type='month'
 							className='pay-modal__month'
-							value={`${bill.period.toString().substring(0, 4)}-${bill.period
-								.toString()
-								.substring(4)}`}
+							control='input'
+							label='Month/Year'
+							placeholder='YYYYMM'
 							readOnly
+							type='month'
+							value={monthValue}
 						/>
 					</Form>
 				</Modal.Description>
 			</Modal.Content>
 			<Modal.Actions>
-				<Button color='orange' onClick={() => setOpen(false)}>
+				<Button color='orange' onClick={closeModal}>
 					cancel
 				</Button>
 				<Button
@@ -80,23 +90,5 @@ function PayModal({ trigger, bill, updateBills }: IPayModalProps) {
 		</Modal>
 	);
 }
-
-const optionsServices = [
-	{
-		key: 'WATER',
-		text: 'WATER',
-		value: 'WATER',
-	},
-	{
-		key: 'SEWER',
-		text: 'SEWER',
-		value: 'SEWER',
-	},
-	{
-		key: 'ELECTRICITY',
-		text: 'ELECTRICITY',
-		value: 'ELECTRICITY',
-	},
-];
 
 export default PayModal;
