@@ -69,7 +69,7 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 
 The current application was implemented taking on account the following features.
 
-- Aplication deployed in [easy-page site](https://easy-pay-aaeb8.web.app/).
+- Aplication deployed in [easy-page site](https://easy-pay-aaeb8.web.app/) hosted by [firebase](https://firebase.google.com/) in the front-end and [back4app](https://www.back4app.com/) for the backend.
 - The application has a single source of true as its storage state managed by redux.
 - Using react-router for the application routing.
 - Updating interface components according to the context (See AppBar)
