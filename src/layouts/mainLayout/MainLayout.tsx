@@ -19,7 +19,7 @@ function MainLayout({ children }: IProps) {
 		<div className='main-layout flex-column'>
 			<Provider value={actionsContext}>
 				<Navbar />
-				<div className='flex-1'>{children}</div>
+				<div className='main-layout__content flex-1'>{children}</div>
 			</Provider>
 		</div>
 	);
