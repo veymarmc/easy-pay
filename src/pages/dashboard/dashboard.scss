@@ -2,6 +2,8 @@
 	background-color: transparent;
 	padding: 3rem 0;
 	height: 100%;
+	display: flex !important;
+	flex-direction: column;
 
 	& &__client-id {
 		margin-left: 2rem;
