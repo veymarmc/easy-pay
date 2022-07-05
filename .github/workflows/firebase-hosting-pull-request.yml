@@ -1,0 +1,33 @@
+name: Deploy to Firebase Hosting on PR
+'on': pull_request
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+      - name: install node 16.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+          cache: npm
+      - name: install-app
+        run: npm install
+
+      - name: lint
+        run: npm run lint
+
+      - name: test
+        run: npm run test
+  build_and_preview:
+    if: '${{ github.event.pull_request.head.repo.full_name == github.repository }}'
+    needs: [test]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: npm ci && npm run build
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_EASY_PAY_AAEB8 }}'
+          projectId: easy-pay-aaeb8
